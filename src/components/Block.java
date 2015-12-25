@@ -8,7 +8,9 @@ import java.awt.Toolkit;
 
 public class Block extends Rectangle {
 	
-	Image image;
+	private Image image;
+	public int dx = Constants.BALL_X_SPEED;
+	public int dy = Constants.BALL_Y_SPEED;
 	
 	public Block(int x, int y, int width, int height, String image) {
 		this.x = x;

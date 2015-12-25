@@ -12,7 +12,6 @@ public class Animate implements Runnable {
 	public void run() {
 		while (true) {
 			panel.update();
-			
 			try {
 				Thread.sleep(Constants.DELAY);
 			} catch (InterruptedException e) {

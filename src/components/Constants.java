@@ -15,11 +15,16 @@ public class Constants {
 	public static final int PADDLE_WIDTH = 150;
 	public static final int PADDLE_HEIGHT = 25;
 	public static final int PADDLE_DX = 15;
+	public static final int BALL_WIDTH = 28;
+	public static final int BALL_HEIGHT = 25;
+	public static final int BALL_X_SPEED = 3;
+	public static final int BALL_Y_SPEED = 3;
 	public static final int DELAY = 10;
 	
 	// Graphical constants
 	public static final int BRICK_SPACING = 2;
 	public static final int PADDLE_Y_OFFSET = 50;
+	public static final String BALL = "assets/ball.png";
 	public static final String PADDLE = "assets/paddle.png";
 	public static final String RED_BRICK = "assets/red.png";
 	public static final String GEREN_BRICK = "assets/green.png";

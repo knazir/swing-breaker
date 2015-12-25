@@ -9,18 +9,34 @@ import javax.swing.JPanel;
 
 public class BrickBreakerPanel extends JPanel implements KeyListener {
 
-	ArrayList<Block> blocks = new ArrayList<Block>();
-	Block paddle;
-	Thread thread;
-	Animate animate;
+	private ArrayList<Block> blocks;
+	private ArrayList<Block> balls;
+	private Block paddle;
+	private Thread thread;
+	private Animate animate;
 
 	public BrickBreakerPanel() {
-		this.paddle = new Block((Constants.APPLICATION_WIDTH - Constants.PADDLE_WIDTH)/2,
-								Constants.APPLICATION_HEIGHT - Constants.PADDLE_HEIGHT - Constants.PADDLE_Y_OFFSET,
-								Constants.PADDLE_WIDTH, Constants.PADDLE_HEIGHT, Constants.PADDLE);
+		this.blocks = new ArrayList<Block>();
+		this.balls = new ArrayList<Block>();
+		
+		createPaddle();
+		createBall();
 		renderBricks();
 		addKeyListener(this);
 		setFocusable(true);
+	}
+
+	private void createPaddle() {
+		int paddleX = (Constants.APPLICATION_WIDTH - Constants.PADDLE_WIDTH)/2;
+		int paddleY = Constants.APPLICATION_HEIGHT - Constants.PADDLE_HEIGHT - Constants.PADDLE_Y_OFFSET;
+		this.paddle = new Block(paddleX, paddleY, Constants.PADDLE_WIDTH, Constants.PADDLE_HEIGHT, Constants.PADDLE);
+	}
+	
+	private void createBall() {
+		int ballX = (Constants.APPLICATION_WIDTH - Constants.BALL_WIDTH)/2;
+		int ballY = paddle.y - Constants.PADDLE_HEIGHT;
+		Block ballBlock = new Block(ballX, ballY, Constants.BALL_WIDTH, Constants.BALL_HEIGHT, Constants.BALL);
+		this.balls.add(ballBlock);
 	}
 
 	private void renderBricks() {
@@ -48,15 +64,27 @@ public class BrickBreakerPanel extends JPanel implements KeyListener {
 		}
 	}
 
-	public void paintComponent(Graphics graphic) {
-		super.paintComponent(graphic);
-		for (Block block : this.blocks) {
-			block.draw(graphic, this);
-		}
-		this.paddle.draw(graphic, this);
+	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
+		for (Block block : this.blocks)
+			block.draw(g, this);
+		
+		for (Block ball : this.balls)
+			ball.draw(g, this);
+		
+		this.paddle.draw(g, this);
 	}
 
 	public void update() {
+		for (Block ball : this.balls) {
+			if (ball.x <= 0 || ball.x + Constants.BALL_WIDTH >= Constants.APPLICATION_WIDTH)
+				ball.dx *= -1;
+			ball.x += ball.dx;
+			
+			if (ball.y < 0 || ball.intersects(this.paddle))
+				ball.dy *= -1;
+			ball.y += ball.dy;
+		}
 		repaint();
 	}
 
@@ -67,6 +95,7 @@ public class BrickBreakerPanel extends JPanel implements KeyListener {
 			this.animate = new Animate(this);
 			this.thread = new Thread(animate);
 			thread.start();
+			break;
 		case KeyEvent.VK_LEFT:
 			if (this.paddle.x > 0) 
 				this.paddle.x -= 15;
