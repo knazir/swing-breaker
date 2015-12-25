@@ -8,7 +8,7 @@ import components.Constants;
 public class BrickBreaker {
 	
 	public static void main(String[] args) {
-		JFrame frame = new JFrame("Birck Breaker");
+		JFrame frame = new JFrame("Brick Breaker");
 		
 		BrickBreakerPanel panel = new BrickBreakerPanel();
 		frame.getContentPane().add(panel);
