@@ -68,10 +68,12 @@ public class BrickBreakerPanel extends JPanel implements KeyListener {
 			this.thread = new Thread(animate);
 			thread.start();
 		case KeyEvent.VK_LEFT:
-			this.paddle.x -= 15;
+			if (this.paddle.x > 0) 
+				this.paddle.x -= 15;
 			break;
 		case KeyEvent.VK_RIGHT:
-			this.paddle.x += 15;
+			if (this.paddle.x < Constants.APPLICATION_WIDTH - Constants.PADDLE_WIDTH)
+					this.paddle.x += 15;
 			break;
 		}
 	}
