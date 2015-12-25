@@ -6,6 +6,6 @@ In my first introductory computer science class, CS106A, our third assignment wa
 This is my attempt at trying to recreate that game now that I (to put it in terms of my former self) "know some real Java." This is the first game I've implemented using these libraries, so there's still a bit of a learning curve there to overcome, regardless of how simple the game is.
 
 An image of the game:
-![](http://i.imgur.com/v1BBOJP.png)
+![](http://i.imgur.com/fFgrypy.png?1)
 ___
 All graphics are copyright of their respective owners. Credits to Eduonix for the game assets and their Swing/AWT tutorials.
