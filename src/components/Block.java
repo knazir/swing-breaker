@@ -9,6 +9,7 @@ import java.awt.Toolkit;
 public class Block extends Rectangle {
 	
 	private Image image;
+	public boolean isDestroyed = false;
 	public int dx = Constants.BALL_X_SPEED;
 	public int dy = Constants.BALL_Y_SPEED;
 	
@@ -21,7 +22,8 @@ public class Block extends Rectangle {
 	}
 	
 	public void draw(Graphics graphic, Component component) {
-		graphic.drawImage(this.image, this.x, this.y, component);
+		if (!isDestroyed)
+			graphic.drawImage(this.image, this.x, this.y, component);
 	}
 
 }

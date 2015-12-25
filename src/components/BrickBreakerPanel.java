@@ -76,6 +76,11 @@ public class BrickBreakerPanel extends JPanel implements KeyListener {
 	}
 
 	public void update() {
+		moveBalls();
+		repaint();
+	}
+
+	private void moveBalls() {
 		for (Block ball : this.balls) {
 			if (ball.x <= 0 || ball.x + Constants.BALL_WIDTH >= Constants.APPLICATION_WIDTH)
 				ball.dx *= -1;
@@ -84,8 +89,14 @@ public class BrickBreakerPanel extends JPanel implements KeyListener {
 			if (ball.y < 0 || ball.intersects(this.paddle))
 				ball.dy *= -1;
 			ball.y += ball.dy;
+			
+			for (Block block : this.blocks) {
+				if (ball.intersects(block) && !block.isDestroyed) {
+					block.isDestroyed = true;
+					ball.dy *= -1;
+				}
+			}
 		}
-		repaint();
 	}
 
 	@Override
