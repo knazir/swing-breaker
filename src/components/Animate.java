@@ -10,7 +10,7 @@ public class Animate implements Runnable {
 	
 	@Override
 	public void run() {
-		while (true) {
+		while (!panel.isFinished()) {
 			panel.update();
 			try {
 				Thread.sleep(Constants.DELAY);
