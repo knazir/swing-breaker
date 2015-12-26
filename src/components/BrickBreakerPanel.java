@@ -93,7 +93,6 @@ public class BrickBreakerPanel extends JPanel implements KeyListener {
 	public void update() {
 		runPowerupHandler();
 		runBallHandler();
-		System.out.println("Checking num bricks: " + numBricks);
 		if (this.numBricks == 0) finished = true;
 		repaint();
 	}
